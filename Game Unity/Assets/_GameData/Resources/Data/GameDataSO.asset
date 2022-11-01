@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cdd0fff2c13dee4c92a0c35110a7b4b, type: 3}
+  m_Name: GameDataSO
+  m_EditorClassIdentifier: 
+  SceneData:
+  - Scene: 0
+    ShowLoading: 0
+    IsLoadBundle: 0
+  - Scene: 1
+    ShowLoading: 0
+    IsLoadBundle: 1
+  MinimumLoadingDuration: 2
+  AudioTypeData:
+  - AudioSource: 2
+    Sounds: 00000000
+  - AudioSource: 1
+    Sounds: 
+  - AudioSource: 0
+    Sounds: 0100000002000000
+  LeanLocalization: {fileID: 7898012454122546148, guid: 776b84ede67775a48954adc2c4623edb,
+    type: 3}
+  SceneLoading: {fileID: 2466974136838011312, guid: 379957102dd314a498980fc9e21425e7,
+    type: 3}
+  FrontLoading: {fileID: 3456707499796963636, guid: 7527208015386f5459c18cb6b1197d82,
+    type: 3}
+  BackLoading: {fileID: 3456707499796963636, guid: 14a96d465b082f048b1fa4a2d78451d3,
+    type: 3}
+  PopupCanvas: {fileID: 3134939919332653624, guid: 8a8ec8472c82e29439b26931c1f00510,
+    type: 3}
+  PopupConsent: {fileID: 8214639911493537686, guid: 7ea7f409bbdf9e64e8388dcb48cdf39e,
+    type: 3}
+  PopupInfo: {fileID: 713592921659754558, guid: 20a39d1bae37f7840ab65b076f0d31aa,
+    type: 3}
+  PopupNotification: {fileID: 3398261693222694873, guid: 28dd0fbf75de298448320f0c0c4b21b3,
+    type: 3}
+  PopupSelection: {fileID: 7370526941575542628, guid: 54c29eddcd2055d4b893ae5ac0375456,
+    type: 3}
+  TutorialSectionStep: 
+  TutorialExcludeStepArray: 
+  TutorialCanvas: {fileID: 7435408190652222226, guid: 176407b8063ea414a921d1741813cd16,
+    type: 3}
+  TutorialBox: {fileID: 5809653865343288825, guid: 3a33e688f00a71d46b85ce7d713a026c,
+    type: 3}
+  TutorialArrow: {fileID: 7263276922905238283, guid: 2f0763f4650f1cf44a9740bde2d9b2a6,
+    type: 3}
+  TutorialMask: {fileID: 0}
+  TutorialOverlay: {fileID: 6357536330190701838, guid: 001b4cec24da5d14e9754df1d16736f5,
+    type: 3}

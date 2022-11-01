@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Play.Review", "Google.Play.Review.csproj", "{69FED9A6-76D6-B41E-897F-541BC965D9B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{EFE7B774-4494-5E7F-6C14-99DD6D1B2C4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Play.Core", "Google.Play.Core.csproj", "{FE8B92CE-0D05-FA33-376B-20C24E3223EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Play.Common", "Google.Play.Common.csproj", "{0B6F5F1F-B48E-552D-3E2C-B963F1D1CCFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{69CBD44B-DB2C-BE84-EE3D-372ABDB0E647}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google.Android.AppBundle.Editor", "Google.Android.AppBundle.Editor.csproj", "{9DDA6748-ADBE-0D94-37B0-D061849B0942}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{DA659521-41B0-531B-B38F-C57806E6EBDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69FED9A6-76D6-B41E-897F-541BC965D9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69FED9A6-76D6-B41E-897F-541BC965D9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69FED9A6-76D6-B41E-897F-541BC965D9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69FED9A6-76D6-B41E-897F-541BC965D9B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE7B774-4494-5E7F-6C14-99DD6D1B2C4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE7B774-4494-5E7F-6C14-99DD6D1B2C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE7B774-4494-5E7F-6C14-99DD6D1B2C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE7B774-4494-5E7F-6C14-99DD6D1B2C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8B92CE-0D05-FA33-376B-20C24E3223EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8B92CE-0D05-FA33-376B-20C24E3223EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8B92CE-0D05-FA33-376B-20C24E3223EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8B92CE-0D05-FA33-376B-20C24E3223EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6F5F1F-B48E-552D-3E2C-B963F1D1CCFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6F5F1F-B48E-552D-3E2C-B963F1D1CCFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6F5F1F-B48E-552D-3E2C-B963F1D1CCFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6F5F1F-B48E-552D-3E2C-B963F1D1CCFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69CBD44B-DB2C-BE84-EE3D-372ABDB0E647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69CBD44B-DB2C-BE84-EE3D-372ABDB0E647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69CBD44B-DB2C-BE84-EE3D-372ABDB0E647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69CBD44B-DB2C-BE84-EE3D-372ABDB0E647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DDA6748-ADBE-0D94-37B0-D061849B0942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DDA6748-ADBE-0D94-37B0-D061849B0942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DDA6748-ADBE-0D94-37B0-D061849B0942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DDA6748-ADBE-0D94-37B0-D061849B0942}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA659521-41B0-531B-B38F-C57806E6EBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA659521-41B0-531B-B38F-C57806E6EBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA659521-41B0-531B-B38F-C57806E6EBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA659521-41B0-531B-B38F-C57806E6EBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

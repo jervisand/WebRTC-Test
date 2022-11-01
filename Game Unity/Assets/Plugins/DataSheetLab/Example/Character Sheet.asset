@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1248e6156bf5d0b42bae9b5a94c3f96a, type: 3}
+  m_Name: Character Sheet
+  m_EditorClassIdentifier: 
+  data:
+  - name: hero
+    attack: 10
+    factor: 1
+    describe: Lorem Ipsum is simply dummy text of the print
+    skillSet:
+      Sheet: {fileID: 11400000, guid: 1caa8f3c295274c4cb8e3e9bd8e92271, type: 2}
+      idxList: 000000000100000003000000
+  - name: heroin
+    attack: 9
+    factor: 1
+    describe: typesetting industry. Lorem Ipsum has been the industr
+    skillSet:
+      Sheet: {fileID: 11400000, guid: 1caa8f3c295274c4cb8e3e9bd8e92271, type: 2}
+      idxList: 000000000100000002000000
+  - name: something hack.
+    attack: 12
+    factor: 10
+    describe: tandard dummy text ever since the 1500s, when an unknow
+    skillSet:
+      Sheet: {fileID: 11400000, guid: 1caa8f3c295274c4cb8e3e9bd8e92271, type: 2}
+      idxList: 03000000
+  - name: Giwon
+    attack: 10
+    factor: 1
+    describe: printer took a galley of type and scrambled it to make a t
+    skillSet:
+      Sheet: {fileID: 11400000, guid: 1caa8f3c295274c4cb8e3e9bd8e92271, type: 2}
+      idxList: 03000000
+  - name: enemyStorm
+    attack: 40
+    factor: 0.2
+    describe: 'pecimen book. It has survived not only five centuries, but '
+    skillSet:
+      Sheet: {fileID: 0}
+      idxList: 
+  - name: A
+    attack: 12
+    factor: 1
+    describe: nchanged. It was popularised in the 1960s with the release of
+    skillSet:
+      Sheet: {fileID: 0}
+      idxList: 
+  - name: B
+    attack: 31
+    factor: 1
+    describe: raset sheets containing Lorem Ipsum passages, and m
+    skillSet:
+      Sheet: {fileID: 0}
+      idxList: 
+  - name: C
+    attack: 10
+    factor: 0.6
+    describe: recently with desktop publishing software like Aldus
+    skillSet:
+      Sheet: {fileID: 0}
+      idxList: 
+  - name: D
+    attack: 10
+    factor: 23
+    describe: PageMaker including versions of Lorem Ipsum.
+    skillSet:
+      Sheet: {fileID: 0}
+      idxList: 
+  - name: E
+    attack: 10
+    factor: 0.7
+    describe: Where does it come from?
+    skillSet:
+      Sheet: {fileID: 0}
+      idxList: 
+  - name: asdf
+    attack: 10
+    factor: 1
+    describe: Contrary to popular belief, Lorem Ipsum is not simply random text.
+      It has roots i
+    skillSet:
+      Sheet: {fileID: 0}
+      idxList: 
+  - name: H
+    attack: 10
+    factor: 0.5
+    describe: n a piece of classical Latin literature from 45 BC, making it o
+    skillSet:
+      Sheet: {fileID: 11400000, guid: 1caa8f3c295274c4cb8e3e9bd8e92271, type: 2}
+      idxList: 0300000001000000
+  - name: G
+    attack: 11
+    factor: 1
+    describe: n a piece of classical Latin literature from 45 BC, making it o
+    skillSet:
+      Sheet: {fileID: 11400000, guid: 1caa8f3c295274c4cb8e3e9bd8e92271, type: 2}
+      idxList: 01000000
