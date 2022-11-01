@@ -1,0 +1,243 @@
+{
+	"name": "WebRTCEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "variable",
+			"name": "sdp",
+			"type": "string",
+			"initialValue": "",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 539038998551649
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 365959919422240
+				}
+			],
+			"actions": [],
+			"sid": 406939295625097,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "ClientRTC.Initialize();"
+						}
+					],
+					"sid": 703539549413853
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-connected",
+					"objectClass": "Multiplayer",
+					"sid": 437416135820972
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 721997983287678,
+					"parameters": {
+						"type": "log",
+						"message": "\"[WebRTC] Successfully connected by signalling\""
+					}
+				}
+			],
+			"sid": 776271727302300
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-error",
+					"objectClass": "Multiplayer",
+					"sid": 100278452105162
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 216748558774777,
+					"parameters": {
+						"type": "log",
+						"message": "\"[WebRTC] Something is error\""
+					}
+				}
+			],
+			"sid": 696719109876495
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-disconnected",
+					"objectClass": "Multiplayer",
+					"sid": 150824591878282
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 127615873306283,
+					"parameters": {
+						"type": "log",
+						"message": "\"[WebRTC] Signalling Disconnected\""
+					}
+				}
+			],
+			"sid": 494018024023547
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-peer-connected",
+					"objectClass": "Multiplayer",
+					"sid": 484204968813129
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 944766451815835,
+					"parameters": {
+						"type": "log",
+						"message": "\"[WebRTC] Peer Connected \" & Multiplayer.PeerID"
+					}
+				}
+			],
+			"sid": 266905407662923
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-any-peer-message",
+					"objectClass": "Multiplayer",
+					"sid": 312081175258797
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 305871003888426,
+					"parameters": {
+						"type": "log",
+						"message": "\"[WebRTC] Peer Message: \"  & str(Multiplayer.Message)"
+					}
+				}
+			],
+			"sid": 212705131054237
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 523305194340911
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "OfferText",
+					"sid": 600061691673241,
+					"parameters": {
+						"text": "sdp"
+					}
+				}
+			],
+			"sid": 791848461140033
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "SendOfferButton",
+					"sid": 820313719364778
+				}
+			],
+			"actions": [],
+			"sid": 858551006510063,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 947192276671212,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 196558593372425,
+							"parameters": [
+								"\"offer\"",
+								"\"down\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentString",
+							"sid": 883856375648137,
+							"parameters": [
+								"\"offer\"",
+								"sdp"
+							]
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 820120658372028
+						}
+					],
+					"sid": 443876872344771
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "SendMessageButton",
+					"sid": 925757361565842
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "ClientRTC.SendMessage(\"WOI\");"
+				}
+			],
+			"sid": 263626500034288
+		}
+	],
+	"sid": 655367237330294
+}

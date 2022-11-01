@@ -1,0 +1,10 @@
+{
+	"name": "CustomBrowser",
+	"plugin-id": "Nagih_CustomBrowser",
+	"sid": 834658333263332,
+	"singleglobal-inst": {
+		"type": "CustomBrowser",
+		"properties": {},
+		"uid": 51
+	}
+}
