@@ -73,3 +73,7 @@ Assets/StreamingAssets/build_info.meta
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Game Unity/Library/
+Game Unity/Temp/
+Game Unity/UserSettings/
+Game Unity/Logs/
