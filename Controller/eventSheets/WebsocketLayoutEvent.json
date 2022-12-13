@@ -1,0 +1,313 @@
+{
+	"name": "WebsocketLayoutEvent",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "SendJsonButton",
+					"sid": 734696243517723
+				}
+			],
+			"actions": [],
+			"sid": 551935286523518,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 104758722063015,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "runtime.globalVars.recordTime = ClientRTC.GetDate();"
+						},
+						{
+							"callFunction": "RequestChangeType",
+							"sid": 918772661662046,
+							"parameters": [
+								"\"3001\""
+							]
+						},
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 546961890015802,
+							"parameters": [
+								"\"ping\"",
+								"\"joystick\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentString",
+							"sid": 224291074313487,
+							"parameters": [
+								"\"condition\"",
+								"\"down\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentNumber",
+							"sid": 189309194238006,
+							"parameters": [
+								"\"x\"",
+								"1"
+							]
+						},
+						{
+							"callFunction": "RequestAddContentNumber",
+							"sid": 359354991010215,
+							"parameters": [
+								"\"y\"",
+								"-0.1"
+							]
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 301941833578565
+						},
+						{
+							"id": "append-text",
+							"objectClass": "OfferText",
+							"sid": 184690838023296,
+							"parameters": {
+								"text": "\"Send ping -> \""
+							}
+						}
+					],
+					"sid": 247138930742634
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "SendIntButton",
+					"sid": 561722417096419
+				}
+			],
+			"actions": [],
+			"sid": 510914777066693,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "runtime.globalVars.recordTime = ClientRTC.GetDate();"
+						},
+						{
+							"id": "send-text",
+							"objectClass": "WebSocket",
+							"sid": 953091353769167,
+							"parameters": {
+								"data": "\"31010102009\""
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 744213841817206,
+							"parameters": {
+								"type": "log",
+								"message": "\"31010102009\""
+							}
+						},
+						{
+							"id": "append-text",
+							"objectClass": "AnswerText",
+							"sid": 569107463397773,
+							"parameters": {
+								"text": "\"Send ping -> \""
+							}
+						}
+					],
+					"sid": 355336216218361
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-message",
+					"objectClass": "WebSocket",
+					"sid": 331842183546975
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 541742214973957,
+					"parameters": {
+						"type": "log",
+						"message": "\"New Message: \" & WebSocket.MessageText"
+					}
+				},
+				{
+					"id": "parse",
+					"objectClass": "WebsocketMessage",
+					"sid": 391550068184271,
+					"parameters": {
+						"data": "WebSocket.MessageText"
+					}
+				}
+			],
+			"sid": 799801850050998,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 636524081419847,
+							"parameters": {
+								"first-value": "WebSocket.MessageText",
+								"comparison": 0,
+								"second-value": "\"41010102009\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 673183420998634,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "pongtime",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 220653045577917
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"type": "script",
+									"script": "localVars.pongtime = ClientRTC.GetDate();"
+								},
+								{
+									"id": "append-text",
+									"objectClass": "AnswerText",
+									"sid": 683686379564071,
+									"parameters": {
+										"text": "(pongtime-recordTime) & \"ms Receive pong\r\n\""
+									}
+								}
+							],
+							"sid": 250484993484860
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "has-key",
+							"objectClass": "WebsocketMessage",
+							"sid": 761996138268812,
+							"parameters": {
+								"path": "\"type\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 411050574634749,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-value",
+									"objectClass": "WebsocketMessage",
+									"sid": 948293741017541,
+									"parameters": {
+										"path": "\"type\"",
+										"cmp": 0,
+										"value": "\"4001\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 447392270880189,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "pongtime",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 420266003789236
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"type": "script",
+											"script": "localVars.pongtime = ClientRTC.GetDate();"
+										},
+										{
+											"id": "append-text",
+											"objectClass": "OfferText",
+											"sid": 599623126528496,
+											"parameters": {
+												"text": "(pongtime-recordTime) & \"ms Receive pong\r\n\""
+											}
+										}
+									],
+									"sid": 502520379882471
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-closed",
+					"objectClass": "WebSocket",
+					"sid": 531174432706556
+				}
+			],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 245651502185894,
+					"parameters": {
+						"type": "log",
+						"message": "\"=====SOCKET CLOSE=====\""
+					}
+				},
+				{
+					"id": "reload",
+					"objectClass": "Browser",
+					"sid": 699710435573512
+				}
+			],
+			"sid": 199584138733779
+		}
+	],
+	"sid": 640993827505202
+}

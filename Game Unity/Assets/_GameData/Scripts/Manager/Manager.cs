@@ -17,7 +17,9 @@ namespace Nagih
         [HideInInspector] public AudioManager Audio;
         [HideInInspector] public TutorialManager Tutorial;
         [HideInInspector] public MessageManager Message;
-        [HideInInspector] public WebRTCManager WebRTC;
+        [HideInInspector] public WebsocketManager Websocket;
+
+        //[HideInInspector] public WebRTCManager WebRTC;
         [HideInInspector] public ReviewManager Review;
         [HideInInspector] internal WorkerManager Worker;
         [HideInInspector] internal IntentManager Intent;
@@ -41,7 +43,8 @@ namespace Nagih
             Audio = gameObject.AddComponent<AudioManager>();
             Tutorial = gameObject.AddComponent<TutorialManager>();
             Message = gameObject.AddComponent<MessageManager>();
-            WebRTC = gameObject.AddComponent<WebRTCManager>();
+            Websocket = gameObject.AddComponent<WebsocketManager>();
+            //WebRTC = gameObject.AddComponent<WebRTCManager>();
 
             Review = new ReviewManager();
 
@@ -68,7 +71,7 @@ namespace Nagih
             yield return StartCoroutine(Popup.LoadAsset());
             yield return StartCoroutine(Request.LoadAsset(FrontLoading));
             yield return StartCoroutine(Audio.LoadAsset());
-            Message.StartConnection();
+            //Message.StartConnection();
         }
 
         public void ShowReview()

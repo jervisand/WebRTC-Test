@@ -81,6 +81,8 @@ namespace Nagih
         {
             OnWebsocketOpen?.Invoke();
             Debug.Log($"[Websocket] connection open to {_url}");
+
+            //OnUserConnected += (player) => SendChangeLayout(new List<int>() { player.Id }, "main_menu");
         }
 
         private void OnMessage(byte[] data)
@@ -89,32 +91,41 @@ namespace Nagih
             OnWebsocketMessage?.Invoke(message);
             Debug.Log("[Websocket] incoming message: " + message);
 
-            var json = JObject.Parse(message);
-            var type = json["type"].ToObject<string>();
-            switch (type)
+            try
             {
-                case Const.TYPE_CONNECTED_USER:
-                    OnConnectedUser(json["data"].ToObject<PlayerDataMessage>());
-                    break;
-                case Const.TYPE_DISCONNECTED_USER:
-                    OnDisconnectedUser(json["data"].ToObject<PlayerDataMessage>());
-                    break;
-                case Const.TYPE_CHANGE_ROOM_MASTER:
-                    OnRoomMasterChanged(json["data"].ToObject<PlayerDataMessage>());
-                    break;
-                case Const.TYPE_PING_PONG:
-                    SendPongMessage();
-                    break;
-                case Const.TYPE_FROM_CONTROLLER:
-                    HandleControllerMessage(json["data"].ToObject<ControllerInputMessage>());
-                    break;
-                case Const.TYPE_FROM_GAME:
-                    break;
-                case Const.ERROR_GAME_NOT_EXIST:
-                    break;
-                default:
-                    break;
+                var json = JObject.Parse(message);
+                var type = json["type"].ToObject<string>();
+
+                switch (type)
+                {
+                    case Const.TYPE_CONNECTED_USER:
+                        OnConnectedUser(json["data"].ToObject<PlayerDataMessage>());
+                        break;
+                    case Const.TYPE_DISCONNECTED_USER:
+                        OnDisconnectedUser(json["data"].ToObject<PlayerDataMessage>());
+                        break;
+                    case Const.TYPE_CHANGE_ROOM_MASTER:
+                        OnRoomMasterChanged(json["data"].ToObject<PlayerDataMessage>());
+                        break;
+                    case Const.TYPE_PING_PONG:
+                        SendPongMessage();
+                        break;
+                    case Const.TYPE_FROM_CONTROLLER:
+                        HandleControllerMessage(json["data"].ToObject<ControllerInputMessage>());
+                        break;
+                    case Const.TYPE_FROM_GAME:
+                        break;
+                    case Const.ERROR_GAME_NOT_EXIST:
+                        break;
+                    default:
+                        HandleControllerMessageInt((ulong)message.ToInt());
+                        break;
+                }
             }
+            catch (Exception e)
+            {
+                HandleControllerMessageInt((ulong)message.ToInt());
+            };
         }
 
         private void OnClose(WebSocketCloseCode code)
@@ -150,6 +161,20 @@ namespace Nagih
             var content = new JObject();
             content["answer"] = answer;
             SendMessage(ids, Const.INPUT_ANSWER, content);
+        }
+
+        public void SendIceCandidate(IEnumerable<int> ids, string candidate)
+        {
+            var content = new JObject();
+            content["candidate"] = candidate;
+            SendMessage(ids, Const.INPUT_CANDIDATE, content);
+        }
+
+        public void SendPong(IEnumerable<int> ids)
+        {
+            var content = new JObject();
+            content["pong"] = "pong";
+            SendMessage(ids, Const.INPUT_PONG, content);
         }
 
         // string input from const request mesasge type
@@ -191,6 +216,16 @@ namespace Nagih
             }
 
             if (input == Const.INPUT_ANSWER)
+            {
+                request.data["condition"] = "down";
+            }
+
+            if (input == Const.INPUT_CANDIDATE)
+            {
+                request.data["condition"] = "down";
+            }
+
+            if (input == Const.INPUT_PONG)
             {
                 request.data["condition"] = "down";
             }
@@ -250,11 +285,46 @@ namespace Nagih
                 JToken? sdp = null;
                 if (message.content.TryGetValue("offer", out sdp))
                 {
-                    Manager.GetInstance().WebRTC.SetOffer(sdp.ToString());
+                    //Manager.GetInstance().WebRTC.SetOffer(message.id.ToString(), sdp.ToString());
                 }
             }
-
+            else if (string.Compare(message.input, "candidate") == 0)
+            {
+                JToken? candidate = null;
+                if (message.content.TryGetValue("candidate", out candidate))
+                {
+                    //Manager.GetInstance().WebRTC.AddCandidate(message.id.ToString(), candidate.ToString());
+                }
+            }
+            else if(string.Compare(message.input, "ping") == 0)
+            {
+                SendPong(new List<int>() { message.id });
+            }
+            else if(string.Compare(message.input, "A") == 0 || string.Compare(message.input, "B") == 0)
+            {
+                SendPong(new List<int>() { message.id });
+            }
+            
             OnIncomingControllerInput?.Invoke(message);
+        }
+        internal void HandleControllerMessageInt(ulong message)
+        {
+            string tempMessage;
+            int controllerID;
+            if (message.ToString().StartsWith("31"))
+            {
+                tempMessage = message.ToString().Remove(0, 2);
+                controllerID = tempMessage.Substring(0, 2).ToInt();
+
+                if (tempMessage.Remove(0, 2).StartsWith("02"))
+                {
+                    if (tempMessage.Remove(0, 2).StartsWith("0"))
+                    {
+                        int buttonPressed = tempMessage.Remove(0, 1).ToInt();
+                        _websocket.SendText("410102002");
+                    }
+                }
+            }
         }
     }
 }

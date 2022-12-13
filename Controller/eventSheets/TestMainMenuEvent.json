@@ -1,0 +1,31 @@
+{
+	"name": "TestMainMenuEvent",
+	"events": [
+		{
+			"eventType": "include",
+			"includeSheet": "WebSocketEvent"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "MenuButton",
+					"sid": 815991724551295
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout-by-name",
+					"objectClass": "System",
+					"sid": 986411345467024,
+					"parameters": {
+						"layout": "MenuButton.direct"
+					}
+				}
+			],
+			"sid": 284468672729130
+		}
+	],
+	"sid": 926685960142731
+}

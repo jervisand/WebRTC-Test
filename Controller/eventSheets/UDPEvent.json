@@ -1,0 +1,27 @@
+{
+	"name": "UDPEvent",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 900778691163103
+				}
+			],
+			"actions": [
+				{
+					"id": "connect",
+					"objectClass": "Multiplayer",
+					"sid": 111686821674535,
+					"parameters": {
+						"server": "\"wss://multiplayer.scirra.com\""
+					}
+				}
+			],
+			"sid": 472869038184658
+		}
+	],
+	"sid": 514145670868092
+}

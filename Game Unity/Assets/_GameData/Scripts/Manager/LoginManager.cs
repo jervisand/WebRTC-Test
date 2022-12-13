@@ -127,6 +127,7 @@ namespace Nagih
         private IEnumerator CheckLocalData()
         {
             yield return StartCoroutine(DataSelf.GetInstance().LoadDataFromDevice());
+            DataSelf.GetInstance().CheckDevice64Bit();
 
             UserData user = DataSelf.GetInstance().User;
             if (user == null)

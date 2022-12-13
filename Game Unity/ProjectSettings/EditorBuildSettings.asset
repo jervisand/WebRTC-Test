@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_GameData/Scenes/Splash.unity
     guid: 402fbad6cbf43a34e88a75d6b343cfb4
   - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/_GameData/Scenes/Game.unity
+    guid: f9e3266b2b66f2b4bacc99a621e55484
+  - enabled: 1
+    path: Assets/_GameData/Scenes/TestWebsocket.unity
+    guid: 5a42d84aa5641ff49a14d26ec0f54cac
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 55a8aad23b4366e48ae026f8e18315ec,
       type: 2}

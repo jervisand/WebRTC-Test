@@ -16,6 +16,16 @@
 			"sid": 539038998551649
 		},
 		{
+			"eventType": "variable",
+			"name": "recordTime",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 875878427913611
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -24,7 +34,16 @@
 					"sid": 365959919422240
 				}
 			],
-			"actions": [],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "AnswerText",
+					"sid": 212788213066320,
+					"parameters": {
+						"text": "\"\""
+					}
+				}
+			],
 			"sid": 406939295625097,
 			"children": [
 				{
@@ -44,144 +63,87 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-connected",
-					"objectClass": "Multiplayer",
-					"sid": 437416135820972
-				}
-			],
-			"actions": [
+					"id": "on-clicked",
+					"objectClass": "SendOfferButton",
+					"sid": 820313719364778
+				},
 				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 721997983287678,
-					"parameters": {
-						"type": "log",
-						"message": "\"[WebRTC] Successfully connected by signalling\""
-					}
-				}
-			],
-			"sid": 776271727302300
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-error",
-					"objectClass": "Multiplayer",
-					"sid": 100278452105162
-				}
-			],
-			"actions": [
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 216748558774777,
-					"parameters": {
-						"type": "log",
-						"message": "\"[WebRTC] Something is error\""
-					}
-				}
-			],
-			"sid": 696719109876495
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-disconnected",
-					"objectClass": "Multiplayer",
-					"sid": 150824591878282
-				}
-			],
-			"actions": [
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 127615873306283,
-					"parameters": {
-						"type": "log",
-						"message": "\"[WebRTC] Signalling Disconnected\""
-					}
-				}
-			],
-			"sid": 494018024023547
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-peer-connected",
-					"objectClass": "Multiplayer",
-					"sid": 484204968813129
-				}
-			],
-			"actions": [
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 944766451815835,
-					"parameters": {
-						"type": "log",
-						"message": "\"[WebRTC] Peer Connected \" & Multiplayer.PeerID"
-					}
-				}
-			],
-			"sid": 266905407662923
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-any-peer-message",
-					"objectClass": "Multiplayer",
-					"sid": 312081175258797
-				}
-			],
-			"actions": [
-				{
-					"id": "log",
-					"objectClass": "Browser",
-					"sid": 305871003888426,
-					"parameters": {
-						"type": "log",
-						"message": "\"[WebRTC] Peer Message: \"  & str(Multiplayer.Message)"
-					}
-				}
-			],
-			"sid": 212705131054237
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "every-tick",
+					"id": "compare-boolean-eventvar",
 					"objectClass": "System",
-					"sid": 523305194340911
+					"sid": 287998821052954,
+					"parameters": {
+						"variable": "IsWebRTC"
+					}
 				}
 			],
 			"actions": [
+				{
+					"type": "script",
+					"script": "runtime.globalVars.sdp = ClientRTC.GetLocalDescription();"
+				},
 				{
 					"id": "set-text",
 					"objectClass": "OfferText",
-					"sid": 600061691673241,
+					"sid": 729391204615218,
 					"parameters": {
 						"text": "sdp"
 					}
+				},
+				{
+					"callFunction": "SendOffer",
+					"sid": 451644315543067,
+					"disabled": true,
+					"parameters": [
+						"\"\""
+					]
 				}
 			],
-			"sid": 791848461140033
+			"sid": 858551006510063
 		},
 		{
 			"eventType": "block",
 			"conditions": [
 				{
 					"id": "on-clicked",
-					"objectClass": "SendOfferButton",
-					"sid": 820313719364778
+					"objectClass": "SendJsonButton",
+					"sid": 925757361565842
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 663136446487277,
+					"parameters": {
+						"variable": "IsWebRTC"
+					}
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "ClientRTC.SendMessage(\"{\\\"type\\\":\\\"3001\\\",\\\"data\\\":{\\\"input\\\":\\\"ping\\\",\\\"content\\\":{\\\"ping\\\":\\\"ping\\\"},\\\"condition\\\":\\\"can_join_game\\\",\\\"id\\\":\\\"894\\\"}}\");"
+				},
+				{
+					"id": "append-text",
+					"objectClass": "AnswerText",
+					"sid": 754687101074120,
+					"parameters": {
+						"text": "\"Send ping -> \""
+					}
+				}
+			],
+			"sid": 263626500034288
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-clicked",
+					"objectClass": "SendIntButton",
+					"sid": 134927465492973
 				}
 			],
 			"actions": [],
-			"sid": 858551006510063,
+			"sid": 254504119766121,
 			"children": [
 				{
 					"eventType": "block",
@@ -189,7 +151,257 @@
 						{
 							"id": "pick-by-unique-id",
 							"objectClass": "RequestData",
-							"sid": 947192276671212,
+							"sid": 382776793068986,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "runtime.globalVars.recordTime = ClientRTC.GetDate();"
+						},
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 494741698823402,
+							"parameters": [
+								"\"ping\"",
+								"\"can_join_game\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentString",
+							"sid": 181258645805711,
+							"parameters": [
+								"\"ping\"",
+								"\"ping\""
+							]
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 729989953220746
+						},
+						{
+							"id": "append-text",
+							"objectClass": "AnswerText",
+							"sid": 862765350278676,
+							"parameters": {
+								"text": "\"Send ping -> \""
+							}
+						}
+					],
+					"sid": 513862186572364
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 448703535592100,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"type": "script",
+							"script": "runtime.globalVars.recordTime = ClientRTC.GetDate();"
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 635769311823054
+						},
+						{
+							"id": "append-text",
+							"objectClass": "AnswerText",
+							"sid": 829985804082500,
+							"parameters": {
+								"text": "\"Send ping -> \""
+							}
+						}
+					],
+					"sid": 859852158775015,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"functionName": "ChangeOfferText",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 690268271824576,
+					"parameters": {
+						"variable": "IsWebRTC"
+					}
+				}
+			],
+			"actions": [
+				{
+					"type": "script",
+					"script": "runtime.globalVars.sdp = ClientRTC.GetLocalDescription();"
+				},
+				{
+					"id": "set-text",
+					"objectClass": "OfferText",
+					"sid": 925207115072397,
+					"parameters": {
+						"text": "sdp"
+					}
+				}
+			],
+			"sid": 855001135108049
+		},
+		{
+			"functionName": "ClearLog",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "OfferText",
+					"sid": 279122573170156,
+					"parameters": {
+						"text": "\"Connected by WebRTC\""
+					}
+				},
+				{
+					"id": "set-text",
+					"objectClass": "AnswerText",
+					"sid": 562807843058637,
+					"parameters": {
+						"text": "\"\""
+					}
+				}
+			],
+			"sid": 378949859508549
+		},
+		{
+			"functionName": "AppendPongMessage",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "text",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 734258224840698
+				},
+				{
+					"name": "pongtime",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 689808687707260
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "append-text",
+					"objectClass": "AnswerText",
+					"sid": 400270225377761,
+					"parameters": {
+						"text": "(pongtime-recordTime) & \"ms Receive pong\n\""
+					}
+				}
+			],
+			"sid": 503920035595967
+		},
+		{
+			"functionName": "AppendPongMessageWebsocket",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 672037805444978,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "pongtime",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 169695328126383
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"type": "script",
+							"script": "localVars.pongtime = ClientRTC.GetDate();"
+						},
+						{
+							"id": "append-text",
+							"objectClass": "AnswerText",
+							"sid": 817351849183184,
+							"parameters": {
+								"text": "(pongtime-recordTime) & \"ms Receive pong\r\n\""
+							}
+						}
+					],
+					"sid": 778604356319677
+				}
+			]
+		},
+		{
+			"functionName": "SendOffer",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "offer",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 242424104486075
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 987488025702525,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 939114459102123,
 							"parameters": {
 								"unique-id": "Functions.CreateRequest"
 							}
@@ -198,7 +410,7 @@
 					"actions": [
 						{
 							"callFunction": "RequestChangeInput",
-							"sid": 196558593372425,
+							"sid": 258833574809282,
 							"parameters": [
 								"\"offer\"",
 								"\"down\""
@@ -206,37 +418,79 @@
 						},
 						{
 							"callFunction": "RequestAddContentString",
-							"sid": 883856375648137,
+							"sid": 734690718723619,
 							"parameters": [
 								"\"offer\"",
-								"sdp"
+								"offer"
 							]
 						},
 						{
 							"callFunction": "SendMessageSocket",
-							"sid": 820120658372028
+							"sid": 932089688376984
 						}
 					],
-					"sid": 443876872344771
+					"sid": 433078463309058
 				}
 			]
 		},
 		{
-			"eventType": "block",
-			"conditions": [
+			"functionName": "SendCandidate",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
 				{
-					"id": "on-clicked",
-					"objectClass": "SendMessageButton",
-					"sid": 925757361565842
+					"name": "candidate",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 958651173233156
 				}
 			],
-			"actions": [
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 293486413813848,
+			"children": [
 				{
-					"type": "script",
-					"script": "ClientRTC.SendMessage(\"WOI\");"
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "RequestData",
+							"sid": 420297128014824,
+							"parameters": {
+								"unique-id": "Functions.CreateRequest"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "RequestChangeInput",
+							"sid": 799725788923169,
+							"parameters": [
+								"\"candidate\"",
+								"\"down\""
+							]
+						},
+						{
+							"callFunction": "RequestAddContentString",
+							"sid": 423090420647090,
+							"parameters": [
+								"\"candidate\"",
+								"candidate"
+							]
+						},
+						{
+							"callFunction": "SendMessageSocket",
+							"sid": 969688547041829
+						}
+					],
+					"sid": 652935455816659
 				}
-			],
-			"sid": 263626500034288
+			]
 		}
 	],
 	"sid": 655367237330294

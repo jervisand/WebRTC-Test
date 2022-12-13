@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Nagih
 
         public GameTime Time { get; private set; }
         public LeanLocalization Localization { get; private set; }
+        public bool is64Bit;
 
         protected override void OnAwake()
         {
@@ -56,6 +58,29 @@ namespace Nagih
 
             yield return new WaitForSeconds(Const.ROUTINE_DURATION);
 
+        }
+
+        public void CheckDevice64Bit()
+        {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            is64Bit = Environment.Is64BitProcess;
+            //Manager.GetInstance().WebRTC.SetIsSupport64Bit();
+            /*if (CultureInfo.InvariantCulture.CompareInfo.IndexOf(SystemInfo.processorType, "ARM", CompareOptions.IgnoreCase) >= 0)
+            {
+                is64Bit = Environment.Is64BitProcess;
+            }
+            else
+            {
+                // Must be in the x86 family.
+                if (Environment.Is64BitProcess)
+                    is64Bit = true;
+                else
+                    Debug.Log("x86");
+            }*/
+#else
+            is64Bit = true;
+            //Manager.GetInstance().WebRTC.SetIsSupport64Bit();
+#endif
         }
 
         public IEnumerator CreateUser(string userId)

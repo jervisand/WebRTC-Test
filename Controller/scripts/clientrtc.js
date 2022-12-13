@@ -17,37 +17,31 @@ export let dataChannel;
 export const iceConfiguration = {
 	iceServers: [
 		{
-			urls: "stun:openrelay.metered.ca:80",
-		},
-		{
-			urls: "turn:openrelay.metered.ca:80",
-			username: "openrelayproject",
-			credential: "openrelayproject",
-		},
-		{
-			urls: "turn:openrelay.metered.ca:443",
-			username: "openrelayproject",
-			credential: "openrelayproject",
-		},
-		{
-			urls: "turn:openrelay.metered.ca:443?transport=tcp",
-			username: "openrelayproject",
-			credential: "openrelayproject",
-		},
-	],
+			urls: "stun:stun1.l.google.com:19302",
+		}
+	]
 }
 
 export function Initialize(){
-	localConnection = new RTCPeerConnection();
+	localConnection = new RTCPeerConnection(iceConfiguration);
 	dataChannel = localConnection.createDataChannel("channel");
 	
 	localConnection.onicecandidate = e => {
-		console.log("New Ice Candidate! Print SDP: " + JSON.stringify(localConnection.localDescription));
-		runtime.globalVars.sdp = JSON.stringify(localConnection.localDescription);
+		if(e.candidate != null){
+			console.log("New Ice Candidate! Print SDP: " + e.candidate);
+			runtime.callFunction("ChangeOfferText", [JSON.stringify(localConnection.localDescription)]);
+		}
+		runtime.callFunction("SendCandidate", [JSON.stringify(e.candidate)])
 	};
 	
-	dataChannel.onmessage = e => console.log("Message Entered: " + e.message);
-	dataChannel.onopen = e => console.log("Channel Connected!");
+	dataChannel.onmessage = e => {
+		runtime.callFunction("AppendPongMessage", e.data, Date.now());
+		console.log("Message Entered: " + e.data);
+	};
+	dataChannel.onopen = e => {
+		runtime.callFunction("ClearLog");
+		console.log("Channel Connected!");
+	};
 	
 	CreateOffer();
 }
@@ -57,7 +51,10 @@ export function CreateOffer()
 	if(localConnection != null)
 	{
 		localConnection.createOffer()
-			.then(o => localConnection.setLocalDescription(o))
+			.then(o => {
+				localConnection.setLocalDescription(o);
+				runtime.callFunction("SendOffer", [JSON.stringify(o)])
+			})
 			.then(console.log("Offer created!"));
 	}
 }
@@ -69,10 +66,20 @@ export function SetRemoteDescription(data)
 
 export function SendMessage(data)
 {
+	runtime.globalVars.recordTime = Date.now();
 	dataChannel.send(data);
 }
 
 export function AddIceCandidate(data)
 {
-	localConnection.addIceCandidate(offer);
+	console.log("Add A Candidate! " + data);
+	localConnection.addIceCandidate(JSON.parse(data));
+}
+
+export function GetLocalDescription(){
+	return JSON.stringify(localConnection.localDescription);
+}
+
+export function GetDate(){
+	return Date.now();
 }
