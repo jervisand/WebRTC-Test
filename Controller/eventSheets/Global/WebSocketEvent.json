@@ -92,6 +92,16 @@
 			"sid": 944925218549679
 		},
 		{
+			"eventType": "variable",
+			"name": "TimePingPong",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 207578334841055
+		},
+		{
 			"functionName": "ConnectSocket",
 			"functionDescription": "",
 			"functionCategory": "RequestData Socket",
@@ -140,20 +150,30 @@
 				{
 					"id": "set-eventvar-value",
 					"objectClass": "System",
-					"sid": 378738574572728,
+					"sid": 588170436846222,
+					"disabled": true,
 					"parameters": {
 						"variable": "WEBSOCKET_URL",
-						"value": "\"ws://10.48.40.137:3000\""
+						"value": "\"ws://10.48.40.137:3000/message\""
 					}
 				},
 				{
 					"id": "set-eventvar-value",
 					"objectClass": "System",
-					"sid": 424427099073261,
+					"sid": 601209457981802,
 					"disabled": true,
 					"parameters": {
 						"variable": "WEBSOCKET_URL",
-						"value": "\"ws://127.0.0.1:3000\""
+						"value": "\"ws://10.48.40.142:3000/message\""
+					}
+				},
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 439637180004956,
+					"parameters": {
+						"variable": "WEBSOCKET_URL",
+						"value": "\"wss://nconsoleqc.onigiri.fira.id/controller/backbone/0/aaa\""
 					}
 				},
 				{
@@ -980,11 +1000,13 @@
 											"actions": [
 												{
 													"callFunction": "AppendPongMessageWebsocket",
-													"sid": 774653982233825
+													"sid": 774653982233825,
+													"disabled": true
 												},
 												{
 													"type": "script",
-													"script": "localVars.pongtime = ClientRTC.GetDate();"
+													"script": "localVars.pongtime = ClientRTC.GetDate();",
+													"disabled": true
 												},
 												{
 													"id": "append-text",
@@ -996,7 +1018,96 @@
 													}
 												}
 											],
-											"sid": 985281820413151
+											"sid": 985281820413151,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-eventvar",
+															"objectClass": "System",
+															"sid": 558878799242823,
+															"parameters": {
+																"variable": "TimePingPong",
+																"comparison": 5,
+																"value": "1000"
+															}
+														}
+													],
+													"actions": [
+														{
+															"callFunction": "AppendPongMessageWebsocket",
+															"sid": 603957117172902
+														}
+													],
+													"sid": 587127690294883
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "else",
+															"objectClass": "System",
+															"sid": 129403814315112
+														}
+													],
+													"actions": [
+														{
+															"callFunction": "RequestChangeType",
+															"sid": 212109733421491,
+															"parameters": [
+																"\"3001\""
+															]
+														},
+														{
+															"callFunction": "RequestChangeInput",
+															"sid": 894649970886217,
+															"parameters": [
+																"\"ping\"",
+																"\"joystick\""
+															]
+														},
+														{
+															"callFunction": "RequestAddContentString",
+															"sid": 926828700937322,
+															"parameters": [
+																"\"condition\"",
+																"\"down\""
+															]
+														},
+														{
+															"callFunction": "RequestAddContentNumber",
+															"sid": 784587375712932,
+															"parameters": [
+																"\"x\"",
+																"1"
+															]
+														},
+														{
+															"callFunction": "RequestAddContentNumber",
+															"sid": 176471412526966,
+															"parameters": [
+																"\"y\"",
+																"-0.1"
+															]
+														},
+														{
+															"callFunction": "SendMessageSocket",
+															"sid": 647421444764543
+														},
+														{
+															"id": "add-to-eventvar",
+															"objectClass": "System",
+															"sid": 734043853197572,
+															"parameters": {
+																"variable": "TimePingPong",
+																"value": "1"
+															}
+														}
+													],
+													"sid": 167285043140090
+												}
+											]
 										}
 									]
 								}

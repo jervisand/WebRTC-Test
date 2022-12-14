@@ -20,10 +20,10 @@ namespace Nagih
         public const string VERSION = "v2";
         public const string URL_REQUEST = URL_BASE + "api/" + VERSION + "/request";
         public const string URL_GET_CONTENT = "https://nagihgames.com/api/v1/request";
-        public const string URL_WEBSOCKET_GAME = "game_display/backbone/1";
+        public const string URL_WEBSOCKET_GAME = "game_display/backbone/0";
         //public const string DUMMY_WEBSOCKET_SERVER = "ws://localhost:3000/";
-        //public const string DUMMY_WEBSOCKET_SERVER = "wss://nconsoleqc.onigiri.fira.id/";
-        public const string DUMMY_WEBSOCKET_SERVER = "wss://nconsole.onigiri.fira.id/";
+        public const string DUMMY_WEBSOCKET_SERVER = "wss://nconsoleqc.onigiri.fira.id/";
+        //public const string DUMMY_WEBSOCKET_SERVER = "wss://nconsole.onigiri.fira.id/";
         // --
 
         // config

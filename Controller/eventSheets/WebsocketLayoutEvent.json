@@ -31,6 +31,15 @@
 							"script": "runtime.globalVars.recordTime = ClientRTC.GetDate();"
 						},
 						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 220724287525269,
+							"parameters": {
+								"variable": "TimePingPong",
+								"value": "0"
+							}
+						},
+						{
 							"callFunction": "RequestChangeType",
 							"sid": 918772661662046,
 							"parameters": [
@@ -105,6 +114,15 @@
 						{
 							"type": "script",
 							"script": "runtime.globalVars.recordTime = ClientRTC.GetDate();"
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 790982054814098,
+							"parameters": {
+								"variable": "TimePingPong",
+								"value": "0"
+							}
 						},
 						{
 							"id": "send-text",
@@ -204,13 +222,74 @@
 								{
 									"id": "append-text",
 									"objectClass": "AnswerText",
-									"sid": 683686379564071,
+									"sid": 793772629655490,
 									"parameters": {
-										"text": "(pongtime-recordTime) & \"ms Receive pong\r\n\""
+										"text": "(pongtime-recordTime)/1000 & \"ms Receive pong\r\n\""
 									}
 								}
 							],
-							"sid": 250484993484860
+							"sid": 250484993484860,
+							"disabled": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-eventvar",
+									"objectClass": "System",
+									"sid": 599007111431264,
+									"parameters": {
+										"variable": "TimePingPong",
+										"comparison": 5,
+										"value": "1000"
+									}
+								}
+							],
+							"actions": [
+								{
+									"type": "script",
+									"script": "localVars.pongtime = ClientRTC.GetDate();"
+								},
+								{
+									"id": "append-text",
+									"objectClass": "AnswerText",
+									"sid": 562422921699440,
+									"parameters": {
+										"text": "(pongtime-recordTime)/1000 & \"ms Receive pong\r\n\""
+									}
+								}
+							],
+							"sid": 960610123749412
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 981526715109831
+								}
+							],
+							"actions": [
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 383230653635377,
+									"parameters": {
+										"variable": "TimePingPong",
+										"value": "1"
+									}
+								},
+								{
+									"id": "send-text",
+									"objectClass": "WebSocket",
+									"sid": 402041931324242,
+									"parameters": {
+										"data": "\"31010102009\""
+									}
+								}
+							],
+							"sid": 598253502204509
 						}
 					]
 				},
@@ -267,13 +346,126 @@
 										{
 											"id": "append-text",
 											"objectClass": "OfferText",
-											"sid": 599623126528496,
+											"sid": 457992926590490,
 											"parameters": {
-												"text": "(pongtime-recordTime) & \"ms Receive pong\r\n\""
+												"text": "(pongtime-recordTime)/1000 & \"ms Receive pong\r\n\""
 											}
 										}
 									],
-									"sid": 502520379882471
+									"sid": 502520379882471,
+									"disabled": true
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-eventvar",
+											"objectClass": "System",
+											"sid": 202316847188543,
+											"parameters": {
+												"variable": "TimePingPong",
+												"comparison": 5,
+												"value": "1000"
+											}
+										}
+									],
+									"actions": [
+										{
+											"type": "script",
+											"script": "localVars.pongtime = ClientRTC.GetDate();"
+										},
+										{
+											"id": "append-text",
+											"objectClass": "OfferText",
+											"sid": 175387258615337,
+											"parameters": {
+												"text": "(pongtime-recordTime)/1000 & \"ms Receive pong\r\n\""
+											}
+										}
+									],
+									"sid": 150177510470665
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 454637450125682
+										}
+									],
+									"actions": [],
+									"sid": 991188129495933,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-unique-id",
+													"objectClass": "RequestData",
+													"sid": 754761603969593,
+													"parameters": {
+														"unique-id": "Functions.CreateRequest"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "add-to-eventvar",
+													"objectClass": "System",
+													"sid": 690092829473593,
+													"parameters": {
+														"variable": "TimePingPong",
+														"value": "1"
+													}
+												},
+												{
+													"callFunction": "RequestChangeType",
+													"sid": 221358497202815,
+													"parameters": [
+														"\"3001\""
+													]
+												},
+												{
+													"callFunction": "RequestChangeInput",
+													"sid": 624797237135595,
+													"parameters": [
+														"\"ping\"",
+														"\"joystick\""
+													]
+												},
+												{
+													"callFunction": "RequestAddContentString",
+													"sid": 155742194679903,
+													"parameters": [
+														"\"condition\"",
+														"\"down\""
+													]
+												},
+												{
+													"callFunction": "RequestAddContentNumber",
+													"sid": 912835482617066,
+													"parameters": [
+														"\"x\"",
+														"1"
+													]
+												},
+												{
+													"callFunction": "RequestAddContentNumber",
+													"sid": 321666779798566,
+													"parameters": [
+														"\"y\"",
+														"-0.1"
+													]
+												},
+												{
+													"callFunction": "SendMessageSocket",
+													"sid": 263332505030204
+												}
+											],
+											"sid": 128521232006483
+										}
+									]
 								}
 							]
 						}

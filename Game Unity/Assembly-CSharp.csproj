@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\RestClient\Packages\RSG.Promise\Promise.cs" />
     <Compile Include="Assets\_GameData\Scripts\Popup\PopupPolicy.cs" />
+    <Compile Include="Assets\_GameData\Scripts\Manager\WebsocketSharpManager.cs" />
     <Compile Include="Assets\_GameData\Scripts\UnitTest\UnitTestAds.cs" />
     <Compile Include="Assets\_GameData\Scripts\Scriptable\GameDataSO.cs" />
     <Compile Include="Assets\GooglePlayGames\BasicApi\LeaderboardScoreData.cs" />
@@ -306,6 +307,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Lean\Localization\Examples\Texts\English.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\websocket-sharp.dll" />
     <None Include="Assets\Lean\Common\Examples\Fonts\OFL.txt" />
     <None Include="Assets\Lean\Common\Examples\Shaders\Object.shader" />
     <None Include="Assets\BouncyCastle.Crypto.dll" />
@@ -572,6 +574,9 @@
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>Library\PackageCache\com.unity.analytics@3.6.12\Unity.Analytics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>Library\PackageCache\com.unity.analytics@3.6.12\Unity.Analytics.Tracker.dll</HintPath>

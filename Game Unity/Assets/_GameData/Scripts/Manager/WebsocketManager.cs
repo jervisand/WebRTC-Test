@@ -76,7 +76,7 @@ public class WebsocketManager : MonoBehaviour
 
         connectionText.text = $"Connection: {currentIP}:{currentPort}";
         Debug.Log($"Server is listening on {currentIP}:{currentPort}...");
-
+        
         CheckClient();
     }
 
@@ -154,7 +154,7 @@ public class WebsocketManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         foreach (TcpClient client in networkStreams.Keys)
         {

@@ -118,13 +118,13 @@ namespace Nagih
                     case Const.ERROR_GAME_NOT_EXIST:
                         break;
                     default:
-                        HandleControllerMessageInt((ulong)message.ToInt());
+                        HandleControllerMessageInt(message);
                         break;
                 }
             }
             catch (Exception e)
             {
-                HandleControllerMessageInt((ulong)message.ToInt());
+                HandleControllerMessageInt(message);
             };
         }
 
@@ -307,13 +307,16 @@ namespace Nagih
             
             OnIncomingControllerInput?.Invoke(message);
         }
-        internal void HandleControllerMessageInt(ulong message)
+        internal void HandleControllerMessageInt(string message)
         {
             string tempMessage;
             int controllerID;
-            if (message.ToString().StartsWith("31"))
+
+            if (message.StartsWith("31"))
             {
-                tempMessage = message.ToString().Remove(0, 2);
+                _websocket.SendText("4101010102009");
+                Debug.Log($"[Websocket] send message:{41010102009}");
+                /*tempMessage = message.ToString().Remove(0, 2);
                 controllerID = tempMessage.Substring(0, 2).ToInt();
 
                 if (tempMessage.Remove(0, 2).StartsWith("02"))
@@ -323,7 +326,7 @@ namespace Nagih
                         int buttonPressed = tempMessage.Remove(0, 1).ToInt();
                         _websocket.SendText("410102002");
                     }
-                }
+                }*/
             }
         }
     }

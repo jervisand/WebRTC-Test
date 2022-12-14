@@ -319,6 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 833055038}
   - component: {fileID: 833055037}
+  - component: {fileID: 833055039}
   m_Layer: 0
   m_Name: Websocket Manager
   m_TagString: Untagged
@@ -333,7 +334,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833055036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b726d4adc453f5e4fb1d4a4f3859a924, type: 3}
   m_Name: 
@@ -355,6 +356,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &833055039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833055036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efa6d8db9575204da18b4dd6f9318aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connectionText: {fileID: 1391132245}
+  messageText: {fileID: 1203759137}
 --- !u!1 &1203759135
 GameObject:
   m_ObjectHideFlags: 0
